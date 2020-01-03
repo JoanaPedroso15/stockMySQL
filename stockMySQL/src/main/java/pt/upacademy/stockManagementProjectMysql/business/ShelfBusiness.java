@@ -79,6 +79,16 @@ public void alterarProducts (Shelf shelf, long prodIdNew, boolean isRemove) {
 		
 		
 	}
+	@Override
+	public Collection<Long> getAllIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
     
