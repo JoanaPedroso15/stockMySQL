@@ -1,0 +1,17 @@
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/repositories/RepositoryInterface.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/business/EntityBusiness.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/models/MyEntity.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/controllers/ProductController.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/business/ProductBusinessInterface.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/business/ShelfBusiness.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/models/Product.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/controllers/ShelfController.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/controllers/EntityController.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/repositories/EntityRepository.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/repositories/ProductRepository.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/App.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/business/EntityBusinessInterface.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/business/ShelfBusinessInterface.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/business/ProductBusiness.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/models/Shelf.java
+/Users/alunotarde/Documents/Upacademy/GitProjects/stockManagMySQL/stockManagementProject/src/main/java/pt/upacademy/stockManagementProjectMysql/repositories/ShelfRepository.java

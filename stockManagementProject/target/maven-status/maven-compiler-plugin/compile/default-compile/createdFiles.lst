@@ -1,0 +1,17 @@
+pt/upacademy/stockManagementProjectMysql/repositories/EntityRepository.class
+pt/upacademy/stockManagementProjectMysql/business/ShelfBusiness.class
+pt/upacademy/stockManagementProjectMysql/models/Shelf.class
+pt/upacademy/stockManagementProjectMysql/business/EntityBusiness.class
+pt/upacademy/stockManagementProjectMysql/repositories/ProductRepository.class
+pt/upacademy/stockManagementProjectMysql/controllers/EntityController.class
+pt/upacademy/stockManagementProjectMysql/models/MyEntity.class
+pt/upacademy/stockManagementProjectMysql/business/ProductBusiness.class
+pt/upacademy/stockManagementProjectMysql/business/ProductBusinessInterface.class
+pt/upacademy/stockManagementProjectMysql/repositories/ShelfRepository.class
+pt/upacademy/stockManagementProjectMysql/controllers/ProductController.class
+pt/upacademy/stockManagementProjectMysql/App.class
+pt/upacademy/stockManagementProjectMysql/business/EntityBusinessInterface.class
+pt/upacademy/stockManagementProjectMysql/business/ShelfBusinessInterface.class
+pt/upacademy/stockManagementProjectMysql/controllers/ShelfController.class
+pt/upacademy/stockManagementProjectMysql/repositories/RepositoryInterface.class
+pt/upacademy/stockManagementProjectMysql/models/Product.class
