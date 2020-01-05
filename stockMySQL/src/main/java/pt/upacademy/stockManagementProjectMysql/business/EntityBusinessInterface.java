@@ -18,8 +18,6 @@ public interface EntityBusinessInterface <T extends MyEntity> {
 	void update (T entity) throws Exception;
 	
 	void delete (long id);
-	
-	boolean isEmpty ();
 
 	
 

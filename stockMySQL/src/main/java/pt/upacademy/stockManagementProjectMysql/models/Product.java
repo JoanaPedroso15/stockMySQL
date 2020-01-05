@@ -9,11 +9,18 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+
 @Entity
-@NamedQueries({ @NamedQuery(name = Product.GET_ALL_PRODUCTS, query = "SELECT p FROM Product p") })
+@NamedQueries({
+	@NamedQuery(name = Product.GET_ALL_PRODUCTS, query = "SELECT p FROM Product p"),
+	@NamedQuery(name = Product.GET_ALL_PRODUCTS_IDS, query = "SELECT p.id FROM Product p"),
+	@NamedQuery(name = Product.GET_PRODUCTS_COUNT, query = "SELECT COUNT(p.id) FROM Product p")})
+
 public class Product extends MyEntity implements Serializable {
 
 	public static final String GET_ALL_PRODUCTS = "getAllProducts";
+	public static final String GET_ALL_PRODUCTS_IDS = "getAllProductsIds";
+	public static final String GET_PRODUCTS_COUNT = "getProductsCount";
 	private static final long serialVersionUID = 1L;
 
 	@OneToMany(mappedBy = "produto", fetch = FetchType.EAGER)

@@ -9,10 +9,6 @@ import pt.upacademy.stockManagementProjectMysql.repositories.ShelfRepository;
 @Path("shelves")
 public class ShelfController extends EntityController <ShelfBusiness,ShelfRepository,Shelf> {
 	
-	public ShelfController () {
-		this.busEnt = new ShelfBusiness ();
-	}
-	
 	
 
 }

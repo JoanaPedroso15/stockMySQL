@@ -10,9 +10,5 @@ import pt.upacademy.stockManagementProjectMysql.repositories.ProductRepository;
 @Path("products")
 public class ProductController extends EntityController <ProductBusiness,ProductRepository,Product> {
 	
-	public ProductController () {
-		this.busEnt = new ProductBusiness ();
-	}
-
 
 }

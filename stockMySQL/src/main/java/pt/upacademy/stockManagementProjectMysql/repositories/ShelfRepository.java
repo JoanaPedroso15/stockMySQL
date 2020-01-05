@@ -16,4 +16,9 @@ public class ShelfRepository extends EntityRepository<Shelf>  {
 		return Shelf.GET_ALL_SHELVES;
 	}
 
+	@Override
+	protected String getAllEntitiesIds() {
+		return Shelf.GET_ALL_SHELVES_IDS;
+	}
+
 }

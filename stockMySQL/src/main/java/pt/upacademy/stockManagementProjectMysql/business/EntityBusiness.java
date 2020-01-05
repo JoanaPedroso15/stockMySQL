@@ -24,11 +24,10 @@ public abstract class EntityBusiness <R extends EntityRepository <E>, E extends 
 	public Collection<E> consultAll() {
 		return repository.consultAll();
 	}
-
-//	@Override
-//	public Collection<Long> getAllIds() {
-//		return repository.getAllIds();
-//	}
+	@Override
+	public Collection<Long> getAllIds() {
+		return repository.getAllIds();
+	}
 
 	@Override
 	public long save(E entity) throws Exception {
@@ -38,6 +37,7 @@ public abstract class EntityBusiness <R extends EntityRepository <E>, E extends 
 
 	@Override
 	public void update(E entity) throws Exception {
+		validate (entity.getID());
 		repository.editEntity(entity);
 		
 	}
@@ -47,11 +47,6 @@ public abstract class EntityBusiness <R extends EntityRepository <E>, E extends 
 		repository.removeEntity(id);
 		
 	}
-
-//	@Override
-//	public boolean isEmpty() {
-//		return repository.isEmpty();
-//	}
 	
 	public void validate (long Id) throws IllegalArgumentException {
 		if (repository.consultEntity (Id) == null) {

@@ -111,15 +111,6 @@ public void updateShelfFromProduct(Product p, List<Long> oldShelves, List<Long> 
 	protected String getEntityClassName() {
 		return Product.getName();
 	}
-	@Override
-	public Collection<Long> getAllIds() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 	
 }

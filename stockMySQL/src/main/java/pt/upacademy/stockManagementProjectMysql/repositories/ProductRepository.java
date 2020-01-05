@@ -14,5 +14,10 @@ public class ProductRepository extends EntityRepository<Product> {
 	protected String getAllEntities() {
 		return Product.GET_ALL_PRODUCTS;
 	}
+
+	@Override
+	protected String getAllEntitiesIds() {
+		return Product.GET_ALL_PRODUCTS_IDS;
+	}
 	
 }
