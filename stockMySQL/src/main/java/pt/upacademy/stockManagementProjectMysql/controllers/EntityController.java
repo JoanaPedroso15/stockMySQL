@@ -3,6 +3,7 @@ package pt.upacademy.stockManagementProjectMysql.controllers;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,6 +23,8 @@ import pt.upacademy.stockManagementProjectMysql.repositories.EntityRepository;
 
 
 public abstract class EntityController <T extends EntityBusiness <R,E>, R extends EntityRepository <E>, E extends MyEntity> {
+
+	@Inject
 	protected T busEnt;
 	
  @Context
@@ -37,30 +40,21 @@ public abstract class EntityController <T extends EntityBusiness <R,E>, R extend
  @POST 
  @Consumes (MediaType.APPLICATION_JSON)
  @Produces (MediaType.APPLICATION_JSON)
- public Response addEntity (E ent)  {
-	 	try {
+ public E addEntity (E ent)  {
 	 		busEnt.save(ent);
-	 	}
-	 	catch (Exception e) {
-	 		
-		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel criar a entidade. " + e.getMessage()).build();
-	 }
-	 	return Response.status(Response.Status.OK).entity(ent).build();	
+	 		return ent;
+	 	
  }
  
  @POST 
  @Path("list")
  @Consumes (MediaType.APPLICATION_JSON)
  @Produces (MediaType.APPLICATION_JSON)
- public Response addEntityList (List <E> listEnts) {
-	 try {
+ public List <E> addEntityList (List <E> listEnts) {
 		 for (E ent : listEnts) {
 			 busEnt.save(ent);
-		 } 
-	 } catch (Exception e) {
-		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel criar a entidade. " + e.getMessage()).build(); 
-	 }
-	 return Response.status(Response.Status.OK).entity(listEnts).build();	
+		 }
+	 return listEnts;	
  }
  
  @GET
@@ -72,33 +66,22 @@ public abstract class EntityController <T extends EntityBusiness <R,E>, R extend
  @GET
  @Path("/{id}")
  @Produces (MediaType.APPLICATION_JSON)
- public Response consultEntById (@PathParam("id") long id) {
-	 try {
-		 busEnt.get(id);
+ public E consultEntById (@PathParam("id") long id) {
+	 return  busEnt.get(id);
 		 
-	 }  
-	 catch (IllegalArgumentException e1) {
-		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel consultar a entidade. " + e1.getMessage()).build(); 
-	 }
-	 return Response.status(Response.Status.OK).entity(busEnt.get(id)).build();
+	
  }
  
  @PUT
  @Path("/list")
  @Consumes (MediaType.APPLICATION_JSON)
  @Produces (MediaType.APPLICATION_JSON)
- public Response updateEntList (@PathParam("id") long id, List <E> listEnts) {
-	 try {
+ public List <E> updateEntList (@PathParam("id") long id, List <E> listEnts) {
+	 
 		 for (E ent : listEnts) {
 		 busEnt.update(ent); 
 		 }
-	 }  catch (IllegalArgumentException e1) {
-		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel editar a entidade. " + e1.getMessage()).build();
-	 } catch (Exception e) {
-		 e.printStackTrace();
-		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel editar a entidade. " + e.getMessage()).build(); 
-	 }
-	 return Response.status(Response.Status.OK).entity(listEnts).build();	
+	 return listEnts;	
  }
  
  @PUT
@@ -109,24 +92,27 @@ public abstract class EntityController <T extends EntityBusiness <R,E>, R extend
 	 try {
 		 busEnt.update(ent); 
 	 }  catch (IllegalArgumentException e1) {
-		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel editar a entidade. " + e1.getMessage()).build();
+		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel editar a entidade. ").build();
 	 } catch (Exception e) {
 		 e.printStackTrace();
-		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel editar a entidade. " + e.getMessage()).build(); 
+		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel editar a entidade. ").build(); 
 	 }
 	 return Response.status(Response.Status.OK).entity(ent).build();	
  }
 
  @DELETE 
  @Path("/{id}")
- public Response deleteEnt (@PathParam("id") long id) {
+ public Response deleteEnt (@PathParam("id") long id, E ent) {
 	 try {
-		 busEnt.delete(id); 
+		 busEnt.delete(ent.getID()); 
 	 }  catch (IllegalArgumentException e1) {
-		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel apagar a entidade. " + e1.getMessage()).build();
+		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel apagar a entidade. ").build();
 	 } 
 	 return Response.status(Response.Status.OK).entity("Entidade apagada").build();
  }
  }
+ 
+ 
+
  
  

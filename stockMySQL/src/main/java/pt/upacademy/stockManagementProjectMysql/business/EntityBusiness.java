@@ -30,13 +30,12 @@ public abstract class EntityBusiness <R extends EntityRepository <E>, E extends 
 	}
 
 	@Override
-	public long save(E entity) throws Exception {
-		repository.createEnt (entity);
-	    return entity.getID();
+	public long save(E entity) {
+	    return repository.createEnt (entity);
 	}
 
 	@Override
-	public void update(E entity) throws Exception {
+	public void update(E entity)  {
 		validate (entity.getID());
 		repository.editEntity(entity);
 		

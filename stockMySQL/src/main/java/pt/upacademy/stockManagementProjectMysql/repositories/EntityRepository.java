@@ -1,10 +1,7 @@
 package pt.upacademy.stockManagementProjectMysql.repositories;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;

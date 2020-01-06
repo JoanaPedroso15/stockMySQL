@@ -8,11 +8,11 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = Shelf.GET_ALL_SHELVES, query = "SELECT s FROM Shelf s"),
-	@NamedQuery(name = Shelf.GET_ALL_SHELVES_IDS, query = "SELECT e.id FROM Shelf e"),
-	@NamedQuery(name = Shelf.GET_SHELVES_COUNT, query = "SELECT COUNT(p.id) FROM Shelf p"),
-	@NamedQuery(name = Shelf.GET_SHELVES_BY_PRODUCT_ID, query="SELECT s FROM Shelf s WHERE s.product.id = :productId"),
-	@NamedQuery(name = Shelf.GET_EMPTY_SHELVES, query="SELECT s FROM Shelf s WHERE s.product = null"),
-	@NamedQuery(name = Shelf.SHELVES_PRODUCT_TO_NULL, query="UPDATE Shelf s SET s.product = null WHERE s.product.id = :productId")
+	@NamedQuery(name = Shelf.GET_ALL_SHELVES_IDS, query = "SELECT s.ID FROM Shelf s"),
+	@NamedQuery(name = Shelf.GET_SHELVES_COUNT, query = "SELECT COUNT(p.ID) FROM Shelf p"),
+	@NamedQuery(name = Shelf.GET_SHELVES_BY_PRODUCT_ID, query="SELECT s FROM Shelf s WHERE s.produto.ID = :productId"),
+	@NamedQuery(name = Shelf.GET_EMPTY_SHELVES, query="SELECT s FROM Shelf s WHERE s.produto = null"),
+	@NamedQuery(name = Shelf.SHELVES_PRODUCT_TO_NULL, query="UPDATE Shelf s SET s.produto = null WHERE s.produto.ID = :productId")
 })
 public class Shelf extends MyEntity {
 	
@@ -29,6 +29,22 @@ public class Shelf extends MyEntity {
 	private Product produto;
 	private float dailyPrice;
 	
+	
+	
+
+public Shelf(int capacidade, Product produto, float dailyPrice) {
+		this.capacidade = capacidade;
+		this.produto = produto;
+		this.dailyPrice = dailyPrice;
+	}
+
+
+
+public Shelf() {
+	
+}
+
+
 
 public int getCapacidade() {
 		return capacidade;

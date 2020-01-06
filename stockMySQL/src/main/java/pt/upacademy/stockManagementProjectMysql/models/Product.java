@@ -13,8 +13,8 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = Product.GET_ALL_PRODUCTS, query = "SELECT p FROM Product p"),
-	@NamedQuery(name = Product.GET_ALL_PRODUCTS_IDS, query = "SELECT p.id FROM Product p"),
-	@NamedQuery(name = Product.GET_PRODUCTS_COUNT, query = "SELECT COUNT(p.id) FROM Product p")})
+	@NamedQuery(name = Product.GET_ALL_PRODUCTS_IDS, query = "SELECT p.ID FROM Product p"),
+	@NamedQuery(name = Product.GET_PRODUCTS_COUNT, query = "SELECT COUNT(p.ID) FROM Product p")})
 
 public class Product extends MyEntity implements Serializable {
 
@@ -28,6 +28,23 @@ public class Product extends MyEntity implements Serializable {
 	private int discount;
 	private int iva;
 	private float pvp;
+	
+	
+
+	public Product(List<Shelf> shelves, int discount, int iva, float pvp) {
+		
+		this.shelves = shelves;
+		this.discount = discount;
+		this.iva = iva;
+		this.pvp = pvp;
+	}
+	
+	
+
+	public Product() {
+	
+	}
+
 
 	public List<Shelf> getShelvesIds() {
 		return shelves;

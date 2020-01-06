@@ -20,4 +20,6 @@ public class ProductRepository extends EntityRepository<Product> {
 		return Product.GET_ALL_PRODUCTS_IDS;
 	}
 	
+	
+	
 }
