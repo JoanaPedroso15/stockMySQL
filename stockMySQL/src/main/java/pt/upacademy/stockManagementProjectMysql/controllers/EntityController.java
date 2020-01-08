@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,7 +29,7 @@ import pt.upacademy.stockManagementProjectMysql.models.Shelf;
 import pt.upacademy.stockManagementProjectMysql.models.ShelfDTO;
 import pt.upacademy.stockManagementProjectMysql.repositories.EntityRepository;
 
-
+@Transactional
 public abstract class EntityController <T extends EntityBusiness <R,E,D>, R extends EntityRepository <E,D>, E extends MyEntity<D>, D extends EntityDTO> {
 
 	@Inject
@@ -81,6 +82,7 @@ public abstract class EntityController <T extends EntityBusiness <R,E,D>, R exte
 			 E ent = this.toEntity(entDTO);
 			 busEnt.save(ent);
 			 D pNew = ent.toDTO();
+			 
 			 listentsDTONew.add(pNew);
 		 }
 		 
