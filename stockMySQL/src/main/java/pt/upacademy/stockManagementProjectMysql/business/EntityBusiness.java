@@ -5,11 +5,12 @@ import java.util.Collection;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import pt.upacademy.stockManagementProjectMysql.models.EntityDTO;
 import pt.upacademy.stockManagementProjectMysql.models.MyEntity;
 import pt.upacademy.stockManagementProjectMysql.repositories.EntityRepository;
 
 @Transactional
-public abstract class EntityBusiness <R extends EntityRepository <E>, E extends MyEntity> implements EntityBusinessInterface <E> {
+public abstract class EntityBusiness <R extends EntityRepository <E,D>, E extends MyEntity<D>, D extends EntityDTO> implements EntityBusinessInterface <E> {
 
 	@Inject
 	protected R repository;
@@ -54,5 +55,6 @@ public abstract class EntityBusiness <R extends EntityRepository <E>, E extends 
 	}
 
 	protected abstract String getEntityClassName();
+	
 
 }

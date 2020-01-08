@@ -3,7 +3,7 @@ package pt.upacademy.stockManagementProjectMysql.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDTO {
+public class ProductDTO extends EntityDTO {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +15,8 @@ public class ProductDTO {
 	public ProductDTO() {
 	}
 
-	public ProductDTO(List<Long> shelfIds, int discount, int iva, float pvp) {
+	public ProductDTO(Long id, List<Long> shelfIds, int discount, int iva, float pvp) {
+		this.id = id;
 		this.shelfIds = shelfIds;
 		this.discount = discount;
 		this.iva = iva;

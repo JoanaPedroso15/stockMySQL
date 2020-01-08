@@ -6,10 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import pt.upacademy.stockManagementProjectMysql.models.EntityDTO;
 import pt.upacademy.stockManagementProjectMysql.models.MyEntity;
 
 @Transactional
-public abstract class EntityRepository <T extends MyEntity> implements RepositoryInterface <T>{
+public abstract class EntityRepository <T extends MyEntity<D>, D extends EntityDTO> implements RepositoryInterface <T>{
 	
 	@PersistenceContext(unitName = "database")
 	protected EntityManager em;
@@ -22,6 +23,7 @@ public abstract class EntityRepository <T extends MyEntity> implements Repositor
 	protected abstract Class<T> getEntityClass();
 	protected abstract String getAllEntities();
 	protected abstract String getAllEntitiesIds();
+	protected abstract String getEntitiesCount();
 	
 	public Collection<T> consultAll (){
 		return em.createNamedQuery(getAllEntities (), getEntityClass()).getResultList();

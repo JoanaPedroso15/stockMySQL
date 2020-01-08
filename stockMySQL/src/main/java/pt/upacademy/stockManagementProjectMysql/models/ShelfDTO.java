@@ -1,7 +1,7 @@
 package pt.upacademy.stockManagementProjectMysql.models;
 
 
-public class ShelfDTO {
+public class ShelfDTO extends EntityDTO {
 
 	private static final long serialVersionUID = 1L; 
 	
@@ -20,7 +20,8 @@ public class ShelfDTO {
 		this.dailyPrice = dailyPrice;
 	}
 
-	public ShelfDTO(int capacidade, Long produtoId, float dailyPrice) {
+	public ShelfDTO(long id, int capacidade, Long produtoId, float dailyPrice) {
+		this.id = id;
 		this.capacidade = capacidade;
 		this.produtoId = produtoId;
 		this.dailyPrice = dailyPrice;

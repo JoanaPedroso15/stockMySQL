@@ -1,7 +1,9 @@
 package pt.upacademy.stockManagementProjectMysql.controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -18,11 +20,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import pt.upacademy.stockManagementProjectMysql.business.EntityBusiness;
+import pt.upacademy.stockManagementProjectMysql.models.EntityDTO;
 import pt.upacademy.stockManagementProjectMysql.models.MyEntity;
+import pt.upacademy.stockManagementProjectMysql.models.Product;
+import pt.upacademy.stockManagementProjectMysql.models.ProductDTO;
+import pt.upacademy.stockManagementProjectMysql.models.Shelf;
+import pt.upacademy.stockManagementProjectMysql.models.ShelfDTO;
 import pt.upacademy.stockManagementProjectMysql.repositories.EntityRepository;
 
 
-public abstract class EntityController <T extends EntityBusiness <R,E>, R extends EntityRepository <E>, E extends MyEntity> {
+public abstract class EntityController <T extends EntityBusiness <R,E,D>, R extends EntityRepository <E,D>, E extends MyEntity<D>, D extends EntityDTO> {
 
 	@Inject
 	protected T busEnt;
@@ -36,70 +43,89 @@ public abstract class EntityController <T extends EntityBusiness <R,E>, R extend
 	 public String status () {
 		 return "Url: " + context.getRequestUri().toString() + " is Ok";
 	 }
+
+ @GET
+ @Produces (MediaType.APPLICATION_JSON)
+ public List<D> consultAllEnts () {
+	 return busEnt.consultAll().stream().map(E :: toDTO).collect(Collectors.toList());
+	 
+ }
+ 
+ @GET
+ @Path("/{id}")
+ @Produces (MediaType.APPLICATION_JSON)
+ public D consultEntById (@PathParam("id") long id) {
+	 return  busEnt.get(id).toDTO();
+		 
+	
+ }
  
  @POST 
  @Consumes (MediaType.APPLICATION_JSON)
  @Produces (MediaType.APPLICATION_JSON)
- public E addEntity (E ent)  {
-	 		busEnt.save(ent);
-	 		return ent;
-	 	
+ public D addEntity (D entDTO)  {
+	 	E ent = this.toEntity(entDTO);
+	 	busEnt.save(ent);
+	 	D eNew = ent.toDTO();
+	 		return eNew;
+	
  }
  
  @POST 
  @Path("list")
  @Consumes (MediaType.APPLICATION_JSON)
  @Produces (MediaType.APPLICATION_JSON)
- public List <E> addEntityList (List <E> listEnts) {
-		 for (E ent : listEnts) {
+ public List <D> addEntityList (List <D> listEntsDTO) {
+	 List <D> listentsDTONew = new ArrayList <D> ();
+		 for (D entDTO : listEntsDTO) {
+			 E ent = this.toEntity(entDTO);
 			 busEnt.save(ent);
+			 D pNew = ent.toDTO();
+			 listentsDTONew.add(pNew);
 		 }
-	 return listEnts;	
- }
- 
- @GET
- @Produces (MediaType.APPLICATION_JSON)
- public Collection<E> consultAllEnts () {
-	 return busEnt.consultAll();
-	 
- }
- @GET
- @Path("/{id}")
- @Produces (MediaType.APPLICATION_JSON)
- public E consultEntById (@PathParam("id") long id) {
-	 return  busEnt.get(id);
 		 
-	
+	 return listentsDTONew;	
  }
  
- @PUT
- @Path("/list")
- @Consumes (MediaType.APPLICATION_JSON)
- @Produces (MediaType.APPLICATION_JSON)
- public List <E> updateEntList (@PathParam("id") long id, List <E> listEnts) {
-	 
-		 for (E ent : listEnts) {
-		 busEnt.update(ent); 
-		 }
-	 return listEnts;	
- }
+
  
  @PUT
  @Path("/{id}")
  @Consumes (MediaType.APPLICATION_JSON)
  @Produces (MediaType.APPLICATION_JSON)
- public Response updateEnt (@PathParam("id") long id, E ent) {
+ public Response updateEnt (@PathParam("id") long id, D entDTO) {
 	 try {
+		E ent = this.toEntity(entDTO);
 		 busEnt.update(ent); 
+		 D eNew = ent.toDTO();
 	 }  catch (IllegalArgumentException e1) {
 		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel editar a entidade. ").build();
 	 } catch (Exception e) {
 		 e.printStackTrace();
 		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel editar a entidade. ").build(); 
 	 }
-	 return Response.status(Response.Status.OK).entity(ent).build();	
+	 return Response.status(Response.Status.OK).entity(entDTO).build();	
  }
 
+
+ @PUT
+ @Path("/list")
+ @Consumes (MediaType.APPLICATION_JSON)
+ @Produces (MediaType.APPLICATION_JSON)
+ public List <D> updateEntList (@PathParam("id") long id, List <D> listEntsDTOs) {
+	 List <D> listentDTONew = new ArrayList <D> ();
+		 for (D entDTO : listEntsDTOs) {
+			 E ent = this.toEntity(entDTO);
+			 busEnt.update(ent); 
+			 D eNew = ent.toDTO();
+			 listentDTONew.add(eNew);
+		 }
+	 return listentDTONew;	
+ }
+ 
+
+
+ 
  @DELETE 
  @Path("/{id}")
  public Response deleteEnt (@PathParam("id") long id, E ent) {
@@ -110,6 +136,10 @@ public abstract class EntityController <T extends EntityBusiness <R,E>, R extend
 	 } 
 	 return Response.status(Response.Status.OK).entity("Entidade apagada").build();
  }
+ 
+
+ public abstract E toEntity(D entDTO);
+ 
  }
  
  

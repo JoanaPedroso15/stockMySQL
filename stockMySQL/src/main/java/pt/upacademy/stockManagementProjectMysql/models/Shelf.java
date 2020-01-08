@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name = Shelf.GET_EMPTY_SHELVES, query="SELECT s FROM Shelf s WHERE s.produto = null"),
 	@NamedQuery(name = Shelf.SHELVES_PRODUCT_TO_NULL, query="UPDATE Shelf s SET s.produto = null WHERE s.produto.ID = :productId")
 })
-public class Shelf extends MyEntity {
+public class Shelf extends MyEntity<ShelfDTO> {
 	
 	private static final long serialVersionUID = 1L;
 	public static final String GET_ALL_SHELVES = "getAllShelves";
@@ -43,8 +43,6 @@ public Shelf(int capacidade, Product produto, float dailyPrice) {
 public Shelf() {
 	
 }
-
-
 
 public int getCapacidade() {
 		return capacidade;
@@ -75,12 +73,24 @@ public static String getName() {
 }
 
 @Override
+public ShelfDTO toDTO () {
+	long productid;
+	if (this.getProduto() != null) {
+		productid = this.getProduto().getID();
+	} else {
+		productid = 0;
+	}
+		ShelfDTO s = new ShelfDTO(this.getID(), this.getCapacidade(), productid, this.getDailyPrice());
+		return s;
+}
+	
+
+@Override
 public String toString() {
 	return "Shelf [capacidade=" + capacidade + ", produto=" + produto + ", dailyPrice=" + dailyPrice + "]";
 }
 
 
-	
 }
 
 

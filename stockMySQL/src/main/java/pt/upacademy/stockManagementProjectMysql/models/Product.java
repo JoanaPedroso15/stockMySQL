@@ -1,7 +1,9 @@
 package pt.upacademy.stockManagementProjectMysql.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +18,7 @@ import javax.persistence.OneToMany;
 	@NamedQuery(name = Product.GET_ALL_PRODUCTS_IDS, query = "SELECT p.ID FROM Product p"),
 	@NamedQuery(name = Product.GET_PRODUCTS_COUNT, query = "SELECT COUNT(p.ID) FROM Product p")})
 
-public class Product extends MyEntity implements Serializable {
+public class Product extends MyEntity<ProductDTO> implements Serializable {
 
 	public static final String GET_ALL_PRODUCTS = "getAllProducts";
 	public static final String GET_ALL_PRODUCTS_IDS = "getAllProductsIds";
@@ -76,6 +78,17 @@ public class Product extends MyEntity implements Serializable {
 
 	public void setPvp(float pvp) {
 		this.pvp = pvp;
+	}
+	
+	public ProductDTO toDTO() {
+		ProductDTO p = new ProductDTO (
+				this.getID(),
+				this.getShelvesIds().stream().map(Shelf::getID).collect(Collectors.toList()),
+				this.getDiscount(),
+				this.getIva(),
+				this.getPvp()
+				);
+		return p;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class MyEntity implements Serializable {
+public abstract class  MyEntity <D> implements Serializable {
 	private static final long serialVersionUID = 1L; //L significa que e conversao para Long
 	
 	@Id
@@ -26,6 +26,8 @@ public class MyEntity implements Serializable {
 	public void setID(Long iD) {
 		ID = iD;
 	}
+	
+	public abstract D toDTO();
 
 	@Override
 	public String toString() {
