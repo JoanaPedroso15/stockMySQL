@@ -1,28 +1,19 @@
 package pt.upacademy.stockManagementProjectMysql.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import pt.upacademy.stockManagementProjectMysql.business.ProductBusiness;
 import pt.upacademy.stockManagementProjectMysql.business.ShelfBusiness;
 import pt.upacademy.stockManagementProjectMysql.models.Product;
-import pt.upacademy.stockManagementProjectMysql.models.ProductDTO;
 import pt.upacademy.stockManagementProjectMysql.models.Shelf;
 import pt.upacademy.stockManagementProjectMysql.models.ShelfDTO;
 import pt.upacademy.stockManagementProjectMysql.repositories.ShelfRepository;
 
+@RequestScoped
 @Path("shelves")
 public class ShelfController extends EntityController <ShelfBusiness,ShelfRepository,Shelf, ShelfDTO> {
 	@Inject 
@@ -46,7 +37,9 @@ public Shelf toEntity(ShelfDTO entDTO) {
 	}
 	
 	Shelf shelf = new Shelf(entDTO.getCapacidade(), product , entDTO.getDailyPrice());
-
+	if(entDTO.getId() > 0) {
+		shelf.setID(entDTO.getId());
+	}
 	return shelf;
 
 }

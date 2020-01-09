@@ -13,9 +13,9 @@ public interface EntityBusinessInterface <T extends MyEntity> {
 	
 	Collection<Long> getAllIds ();
 	
-	long save (T entity) throws Exception;
+	T save (T entity) throws Exception;
 	
-	void update (T entity) throws Exception;
+	T update (T entity) throws Exception;
 	
 	void delete (long id);
 

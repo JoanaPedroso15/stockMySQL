@@ -3,11 +3,14 @@ package pt.upacademy.stockManagementProjectMysql.business;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.enterprise.context.RequestScoped;
+
 import pt.upacademy.stockManagementProjectMysql.models.Product;
 import pt.upacademy.stockManagementProjectMysql.models.Shelf;
 import pt.upacademy.stockManagementProjectMysql.models.ShelfDTO;
 import pt.upacademy.stockManagementProjectMysql.repositories.ShelfRepository;
 
+@RequestScoped
 public class ShelfBusiness extends EntityBusiness<ShelfRepository, Shelf, ShelfDTO> implements ShelfBusinessInterface {
 	
 	protected String getEntityClassName() {

@@ -15,7 +15,7 @@ public class ProductDTO extends EntityDTO {
 	public ProductDTO() {
 	}
 
-	public ProductDTO(Long id, List<Long> shelfIds, int discount, int iva, float pvp) {
+	public ProductDTO(long id, List<Long> shelfIds, int discount, int iva, float pvp) {
 		this.id = id;
 		this.shelfIds = shelfIds;
 		this.discount = discount;
@@ -54,4 +54,11 @@ public class ProductDTO extends EntityDTO {
 	public void setPvp(float pvp) {
 		this.pvp = pvp;
 	}
+
+	@Override
+	public String toString() {
+		return "ProductDTO [shelfIds=" + shelfIds + ", discount=" + discount + ", iva=" + iva + ", pvp=" + pvp + "]";
+	}
+	
+	
 }

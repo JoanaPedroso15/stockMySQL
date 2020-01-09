@@ -9,9 +9,9 @@ public interface RepositoryInterface<T> {
 
 	public void removeEntity (Long iD);
 	
-	public void editEntity (T newEnt);
+	public T editEntity (T newEnt);
 	
-	public Long createEnt (T newEnt);
+	public T createEnt (T newEnt);
 	
 	public Collection<T> consultAll ();
 }

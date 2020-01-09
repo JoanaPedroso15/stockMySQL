@@ -31,14 +31,16 @@ public abstract class EntityBusiness <R extends EntityRepository <E,D>, E extend
 	}
 
 	@Override
-	public long save(E entity) {
+	public E save(E entity) {
 	    return repository.createEnt (entity);
 	}
 
 	@Override
-	public void update(E entity)  {
+	public E update(E entity)  {
+		System.out.println(entity);
 		validate (entity.getID());
-		repository.editEntity(entity);
+		E updEnt = repository.editEntity(entity);
+		 return updEnt;
 		
 	}
 

@@ -3,11 +3,13 @@ package pt.upacademy.stockManagementProjectMysql.repositories;
 
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.TypedQuery;
 
 import pt.upacademy.stockManagementProjectMysql.models.Shelf;
 import pt.upacademy.stockManagementProjectMysql.models.ShelfDTO;
 
+@RequestScoped
 public class ShelfRepository extends EntityRepository<Shelf, ShelfDTO>  {
 	
 

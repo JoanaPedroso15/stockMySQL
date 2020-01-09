@@ -1,9 +1,11 @@
 package pt.upacademy.stockManagementProjectMysql.repositories;
 
+import javax.enterprise.context.RequestScoped;
+
 import pt.upacademy.stockManagementProjectMysql.models.Product;
 import pt.upacademy.stockManagementProjectMysql.models.ProductDTO;
 
-
+@RequestScoped
 public class ProductRepository extends EntityRepository<Product, ProductDTO> {
 
 	@Override

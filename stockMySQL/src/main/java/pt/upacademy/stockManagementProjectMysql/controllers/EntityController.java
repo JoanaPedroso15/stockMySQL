@@ -1,7 +1,6 @@
 package pt.upacademy.stockManagementProjectMysql.controllers;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,10 +22,6 @@ import javax.ws.rs.core.UriInfo;
 import pt.upacademy.stockManagementProjectMysql.business.EntityBusiness;
 import pt.upacademy.stockManagementProjectMysql.models.EntityDTO;
 import pt.upacademy.stockManagementProjectMysql.models.MyEntity;
-import pt.upacademy.stockManagementProjectMysql.models.Product;
-import pt.upacademy.stockManagementProjectMysql.models.ProductDTO;
-import pt.upacademy.stockManagementProjectMysql.models.Shelf;
-import pt.upacademy.stockManagementProjectMysql.models.ShelfDTO;
 import pt.upacademy.stockManagementProjectMysql.repositories.EntityRepository;
 
 @Transactional
@@ -66,8 +61,8 @@ public abstract class EntityController <T extends EntityBusiness <R,E,D>, R exte
  @Produces (MediaType.APPLICATION_JSON)
  public D addEntity (D entDTO)  {
 	 	E ent = this.toEntity(entDTO);
-	 	busEnt.save(ent);
-	 	D eNew = ent.toDTO();
+	 	E savedEnt = busEnt.save(ent);
+	 	D eNew = savedEnt.toDTO();
 	 		return eNew;
 	
  }
@@ -79,10 +74,7 @@ public abstract class EntityController <T extends EntityBusiness <R,E,D>, R exte
  public List <D> addEntityList (List <D> listEntsDTO) {
 	 List <D> listentsDTONew = new ArrayList <D> ();
 		 for (D entDTO : listEntsDTO) {
-			 E ent = this.toEntity(entDTO);
-			 busEnt.save(ent);
-			 D pNew = ent.toDTO();
-			 
+			 D pNew = this.addEntity(entDTO);
 			 listentsDTONew.add(pNew);
 		 }
 		 
@@ -98,8 +90,8 @@ public abstract class EntityController <T extends EntityBusiness <R,E,D>, R exte
  public Response updateEnt (@PathParam("id") long id, D entDTO) {
 	 try {
 		E ent = this.toEntity(entDTO);
-		 busEnt.update(ent); 
-		 D eNew = ent.toDTO();
+		 E updatedEnt = busEnt.update(ent); 
+		 D eNew = updatedEnt.toDTO();
 	 }  catch (IllegalArgumentException e1) {
 		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel editar a entidade. ").build();
 	 } catch (Exception e) {
@@ -118,8 +110,8 @@ public abstract class EntityController <T extends EntityBusiness <R,E,D>, R exte
 	 List <D> listentDTONew = new ArrayList <D> ();
 		 for (D entDTO : listEntsDTOs) {
 			 E ent = this.toEntity(entDTO);
-			 busEnt.update(ent); 
-			 D eNew = ent.toDTO();
+			 E updatedEnt = busEnt.update(ent); 
+			 D eNew = updatedEnt.toDTO();
 			 listentDTONew.add(eNew);
 		 }
 	 return listentDTONew;	
@@ -130,9 +122,10 @@ public abstract class EntityController <T extends EntityBusiness <R,E,D>, R exte
  
  @DELETE 
  @Path("/{id}")
- public Response deleteEnt (@PathParam("id") long id, E ent) {
+ @Produces (MediaType.APPLICATION_JSON)
+ public Response deleteEnt (@PathParam("id") long id) {
 	 try {
-		 busEnt.delete(ent.getID()); 
+		 busEnt.delete(id); 
 	 }  catch (IllegalArgumentException e1) {
 		 return Response.status(Response.Status.BAD_REQUEST).entity("Nao foi possivel apagar a entidade. ").build();
 	 } 

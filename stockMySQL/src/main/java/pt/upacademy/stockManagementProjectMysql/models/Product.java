@@ -1,10 +1,10 @@
 package pt.upacademy.stockManagementProjectMysql.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
@@ -25,7 +25,7 @@ public class Product extends MyEntity<ProductDTO> implements Serializable {
 	public static final String GET_PRODUCTS_COUNT = "getProductsCount";
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(mappedBy = "produto", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = false)
 	private List<Shelf> shelves;
 	private int discount;
 	private int iva;

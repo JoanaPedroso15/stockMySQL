@@ -1,6 +1,8 @@
 package pt.upacademy.stockManagementProjectMysql.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -87,7 +89,7 @@ public ShelfDTO toDTO () {
 
 @Override
 public String toString() {
-	return "Shelf [capacidade=" + capacidade + ", produto=" + produto + ", dailyPrice=" + dailyPrice + "]";
+	return "Shelf [capacidade=" + capacidade + ", produto=" + produto.getID() + ", dailyPrice=" + dailyPrice + "]";
 }
 
 

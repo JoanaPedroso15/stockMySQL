@@ -16,8 +16,8 @@ public abstract class EntityRepository <T extends MyEntity<D>, D extends EntityD
 	protected EntityManager em;
 
 	
-	public Long createEnt (T newEnt) {
-		return em.merge(newEnt).getID();
+	public T createEnt (T newEnt) {
+		return em.merge(newEnt);
 	}
 
 	protected abstract Class<T> getEntityClass();
@@ -41,15 +41,17 @@ public abstract class EntityRepository <T extends MyEntity<D>, D extends EntityD
 	
 	
 	public void removeEntity (Long iD) {
+		System.out.println("removeEntity : " + iD);
 		T ent = consultEntity(iD);
+		System.out.println("removeEntity : " + ent);
 		if (ent != null) {
 			em.remove(ent);
 		}
 	}
 	
 	
-	public void editEntity (T newEnt) {
-		em.merge(newEnt);
+	public T editEntity (T newEnt) {
+		return em.merge(newEnt);
 	}
 	
 	
