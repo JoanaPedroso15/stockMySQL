@@ -122,7 +122,7 @@ public abstract class EntityController <T extends EntityBusiness <R,E,D>, R exte
  
  @DELETE 
  @Path("/{id}")
- @Produces (MediaType.APPLICATION_JSON)
+ @Produces (MediaType.TEXT_PLAIN)
  public Response deleteEnt (@PathParam("id") long id) {
 	 try {
 		 busEnt.delete(id); 
